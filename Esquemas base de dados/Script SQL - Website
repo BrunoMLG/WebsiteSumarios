@@ -1,0 +1,70 @@
+CREATE DATABASE websiteSumarios;
+
+USE websiteSumarios;
+
+CREATE TABLE Aluno (
+	id_aluno int NOT NULL AUTO_INCREMENT primary key,
+	nome varchar(100),
+	morada varchar(70),
+	telemovel varchar(13),
+	email varchar(30) not null,
+	password varchar(20),
+	id_turma int not null references Turma(id_turma)
+);
+
+CREATE TABLE Professor (
+	id_prof int NOT NULL AUTO_INCREMENT primary key,
+	nome varchar(100),
+	morada varchar(70),
+	telemovel varchar(13),
+	email varchar(30) not null,
+	password varchar(20)
+);
+
+CREATE TABLE UC (
+	id_uc int NOT NULL AUTO_INCREMENT primary key,
+	nome varchar(60) not null,
+	horas integer,
+	id_aula int not null references Aula(id)
+);
+
+CREATE TABLE Sumario (
+	id int NOT NULL AUTO_INCREMENT primary key
+);
+
+CREATE TABLE Aula (
+	id int NOT NULL AUTO_INCREMENT primary key,
+	data2 date not null,
+	hora_ini datetime not null,
+	hora_fim datetime not null,
+	duracao integer not null,
+	modo varchar(30) not null,
+	tipo varchar(30) not null,
+	id_sum int not null references Sumario(id) unique key
+);
+
+CREATE TABLE Turma (
+	id_turma int NOT NULL AUTO_INCREMENT primary key,
+	curso varchar(100),
+	ano tinyint,
+	semestre tinyint
+);
+
+CREATE TABLE marca (
+	id_aluno int NOT NULL references Aluno(id_aluno),
+	id_aula int not null references Aula(id),
+	presencas boolean,
+	primary key (id_aluno, id_aula)
+);
+
+CREATE TABLE tem (
+	id_turma int not null references Turma(id_turma),
+	id_uc int not null references UC(id_uc),
+	primary key (id_turma, id_uc)
+);
+
+CREATE TABLE leciona (
+	id_prof int not null references Professor(id_prof),
+	id_uc int not null references UC(id_uc),
+	primary key (id_prof, id_uc)
+);
