@@ -1,6 +1,6 @@
 function login(){
     alert("Acabou de Iniciar Sessão!");
-    window.location.href = "painel_administracao.html";
+    window.location.href = "painel_administracao.php";
 }
 
 function submitSum(){
@@ -12,4 +12,8 @@ function random(){
 let nRandom = Math.floor(Math.random() * 10001);  
 document.getElementById("inputID").value = nRandom;
 
+}
+
+function registar(){
+    window.location.href ="registar.php";
 }
