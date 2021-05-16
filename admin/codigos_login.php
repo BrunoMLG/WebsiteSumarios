@@ -12,28 +12,19 @@
     <div class="row">
         <div class="col-md-6 ">
 
-            <form>
+            <form action="gerar_email.php" method="POST">
                 <div class="form-group row">
-                    <label for="inpupID" class="col-sm-3 col-form-label">Novo ID:</label>
+                    <label for="email" class="col-sm-3 col-form-label">Email:</label>
                     <div class="col-sm-2">
-                        <input type="number" class="form-control" id="inputID" readonly>
+                        <input type="email" class="form-control" name ="email" id="email" required>
                     </div>
                     <div class="col-sm-2">
-                        <input type="button" value="Gerar" onclick="random()" class="form-control" >
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
                     </div>
                 </div><br>
-                <div class="form-group row">
-                    <label for="inputEmail" class="col-sm-3 col-form-label">Email:</label>
-                    <div class="col-sm-2">
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                    </div>
-                    <div class="col-sm-2">
-                        <input type="button" value="Adicionar"  class="form-control" >
-                    </div>
-                </div>
                 <br>
                 <div class="form-group row">
-                    <label for="inputEmail" class="col-sm-3 col-form-label">Codigos Recentes:</label>
+                    <P>Emials Recentes.</P>
                 </div>
             </form>    
         </div>

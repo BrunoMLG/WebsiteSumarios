@@ -1,5 +1,7 @@
 <?php
   include_once('snippets/head.php');
+  include_once('snippets/register.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +56,7 @@
                     </div>
                 </div><br>
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                     <label for="inputPerfil" class="col-sm-3 col-form-label">Perfil:</label>
                     <div class="col-sm-9">
                     <select name="perf" id="perf"class="col-sm-9 form-control">
@@ -62,8 +64,8 @@
                         <option value="professor" id="professor">Professor</option>
                     </select>
                     </div>
-                </div>
-
+                </div> -->
+                <button type="submit" class="btn" name="login_user">Login</button>
                  </form>  <!--botões deverãopassar para dentro do form--> 
                 <div class="form-group row">
                     <div class="col-sm-3">
