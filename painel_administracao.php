@@ -1,12 +1,15 @@
 <?php
   include_once('snippets/head.php');
   include_once('snippets/startDB.php');
+  include_once('snippets/SessionAdmin.php');
+
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="JS/javascript_admin.js" ></script>    
+    <script src="JS/javascript_admin.js" ></script>  
+    <a href="logoutAdmin.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>  
     <title>Login Administração</title>
 </head>
 <body>

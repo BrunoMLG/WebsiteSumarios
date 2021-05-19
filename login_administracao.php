@@ -1,29 +1,31 @@
 <?php
   include_once('snippets/head.php');
-  
+?>
+
+<?php
   include('snippets/startDB.php');
 
 session_start();
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: lista_disc_alunos.php");
+    header("location: painel_administracao.php");
     exit;
 }
 
  
 // Define variables and initialize with empty values
-$email = $password = "";
-$email_err = $password_err = $login_err = "";
+$username = $password = "";
+$username_err = $password_err = $login_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Check if username is empty
-    if(empty(trim($_POST["email"]))){
-        $email_err = "Insira o Email!";
+    if(empty(trim($_POST["nome"]))){
+        $username_err = "Insira o Nome!";
     } else{
-        $email = trim($_POST["email"]);
+        $username = trim($_POST["nome"]);
     }
     
     // Check if password is empty
@@ -34,25 +36,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Validate credentials
-    if(empty($email_err) && empty($password_err)){
+    if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id, nome, password, email ,tipo FROM aluno WHERE email = ? UNION SELECT id, nome, password, email, tipo FROM professor WHERE email = ?";
+        $sql = "SELECT id_admin, nome, password FROM admin WHERE nome = ?";
         
         if($stmt = $dbh->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-             $email = $_POST['email'];
+             $username = $_POST['nome'];
             //$stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
             
             // Set parameters
             //$param_username = trim($_POST["nome"]);
             
             // Attempt to execute the prepared statement
-            if($stmt->execute(array($email, $email))){
+            if($stmt->execute(array($username))){
                 // Check if username exists, if yes then verify password
                 if($stmt->rowCount() == 1){
                     if($row = $stmt->fetch()){
-                        $id = $row["id"];
-                        $tipo = $row["tipo"];
+                        $id = $row["id_admin"];
                         $username = $row["nome"];
                         $hashed_password = $row["password"];
                         if($password== $hashed_password){
@@ -62,11 +63,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
-                            $_SESSION["nome"] = $username;   
-                            $_SESSION["tipo"] = $tipo;                        
+                            $_SESSION["nome"] = $username;                            
                             
                             // Redirect user to welcome page
-                            header("location: lista_disc_alunos.php");
+                            header("location: painel_administracao.php");
                         } else{
                             // Password is not valid, display a generic error message
                             $login_err = "Password ou nome errados.";
@@ -90,13 +90,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
 
-
 ?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script src="JS/javasript.js" ></script> 
-    <title>Login Alunos</title>
+    <script src="JS/javascript_admin.js" ></script>    
+    <title>Login Administração</title>
 </head>
 <body>
 
@@ -122,55 +127,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       </nav>
 
 
-   
-
-        <div class="container-fluid">
-        <h1 style="text-align: center; font-size: 80px">Login</h1>
+    <div class="container-fluid">
+        <h1 style="text-align: center; font-size: 100px">Login</h1>
     </div>
-    <br>
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-        <?php 
+<br>
+
+<?php 
         if(!empty($login_err)){
             echo '<div class="alert alert-danger">' . $login_err . '</div>';
         }        
         ?>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-                <div class="form-group row">
-                    <label for="email" class="col-sm-3 col-form-label">Email:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="email" placeholder="Email">
-                    </div>
-                </div><br>
-                <div class="form-group row">
-                    <label for="password" class="col-sm-3 col-form-label">Password</label>
-                    <div class="col-sm-9">
-                        <input type="password" class="form-control" name="password" placeholder="Password:">
-                    </div>
-                </div><br>
 
-                <!-- <div class="form-group row">
-                    <label for="inputPerfil" class="col-sm-3 col-form-label">Perfil:</label>
-                    <div class="col-sm-9">
-                    <select name="perf" id="perf"class="col-sm-9 form-control">
-                        <option value="aluno" id="aluno">Aluno</option>
-                        <option value="professor" id="professor">Professor</option>
-                    </select>
-                    </div> -->
-                <!-- </div>  -->
-                <div class="form-group row">
-                    <div class="col-sm-3">
-                    <br><button type="submit" class="btn btn-primary"  values="registar">Registar</button></div>
 
-                        <!-- <br><a href="registar.php" class="btn btn-primary">Registar</a> -->
-                    <div style="text-align: right;" class="col-sm-9">
-                        <br><button type="submit" class="btn btn-primary"  Values="login">Login</button></div>
-                    </div>
-                
-                 </form>  
-                
-                    
-        </div>
-    </div>
+    <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                    <div class="form-group row">
+                        <label for="nome" class="col-sm-3 col-form-label">Nome:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="nome" placeholder="Nome:">
+                            <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                        </div>
+                    </div><br>
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-3 col-form-label">Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" name="password" placeholder="Password" >
+                                <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                            </div>
+                        </div><br>
+                        <button type="submit" class="btn btn-primary" value="login" >Login</button>
+                </form>
+            </div>
+    </div>     
 </body>
 </html>

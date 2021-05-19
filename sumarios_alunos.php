@@ -1,5 +1,7 @@
 <?php
   include_once('snippets/head.php');
+  include_once('snippets/startdb.php');
+  include_once('snippets/Session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

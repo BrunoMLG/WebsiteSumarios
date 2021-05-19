@@ -1,6 +1,8 @@
 <?php
-session_start();
-$conn = new mysqli('localhost', 'root', '', 'websitesumarios');
+  include('startDB.php');
+
+// session_start();
+// $conn = new mysqli('localhost', 'root', '', 'websitesumarios');
 
 $email = $_POST['email'];
 $nome = $_POST['nome'];
@@ -8,19 +10,32 @@ $password = $_POST['password'];
 $passwordc = $_POST['passwordc'];
 
 if($password == $passwordc){
-	$s = "select * from email_aluno where email = '$email'";
-	$s1 = "select * from aluno where email = '$email'";
 
-	$result = $conn->query($s);
-	$result1 = $conn->query($s1);
+	$stmt = $dbh->prepare('select * from email_aluno where email = ?');
+	$stmt->execute(array($email));
+	$num = $stmt->rowCount();
 
-	$num = mysqli_num_rows($result);
-	$num1 = mysqli_num_rows($result1);
+	$stmt = $dbh->prepare('select * from aluno where email = ?');
+	$stmt->execute(array($email));
+	$num1 = $stmt->rowCount();
+
+	// $s = "select * from email_aluno where email = '$email'";
+	// $s1 = "select * from aluno where email = '$email'";
+
+	// $result = $conn->query($s);
+	// $result1 = $conn->query($s1);
+
+	// $num = mysqli_num_rows($result);
+	// $num1 = mysqli_num_rows($result1);
 
 
 	if($num == 1 and $num1 == 0){
-		$criarconta = "insert into aluno(id_aluno, nome, email, password) values(null,'$nome','$email','$password')";
-		$conn->query($criarconta);
+
+		$stmt = $dbh->prepare('insert into aluno(id_aluno, nome, email, password) values(?, ?, ?, ?)');
+		$stmt->execute(array('null',$nome,$email,$password));
+
+		// $criarconta = "insert into aluno(id_aluno, nome, email, password) values(null,'$nome','$email','$password')";
+		// $conn->query($criarconta);
 		echo("Registo realizado!");
 	}else{if($num1 != 0){
 		echo("Email já registado!");}

@@ -26,7 +26,8 @@ CREATE TABLE Professor (
 	telemovel varchar(13),
 	email varchar(30) not null,
 	password varchar(20),
-	CONSTRAINT fk_email FOREIGN KEY (email) references email_Prof(email)
+	CONSTRAINT fk_email FOREIGN KEY (email) references email_Prof(email),
+	tipo varchar(10)
 );
 
 CREATE TABLE Sumario (
@@ -42,7 +43,8 @@ CREATE TABLE Aluno (
 	password varchar(20) not null,
 	id_turma int,  
 	CONSTRAINT fk_id_turma FOREIGN KEY (id_turma) references Turma(id_turma),
-	CONSTRAINT fk_email1 FOREIGN KEY (email) references email_Aluno(email)
+	CONSTRAINT fk_email1 FOREIGN KEY (email) references email_Aluno(email),
+	tipo varchar(10)
 );
 
 
@@ -95,3 +97,18 @@ CREATE TABLE leciona (
 );
 
 
+CREATE TABLE Admin(
+	id_Admin int NOT NULL AUTO_INCREMENT primary key,
+	Nome varchar(100) unique key,
+	password varchar(20)
+);
+
+insert into email_prof values('rb@gmail.com')
+insert into email_aluno values('bruno@gmail.com')
+
+insert into Admin values(null,'admin','admin')
+
+
+insert into professor values(null,'Ricardo Batista',null,null,'rb@gmail.com','123','Professor')
+
+insert into aluno values(null,'bruno',null,null,'bruno@gmail.com','123',null,'Aluno')
