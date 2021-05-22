@@ -66,24 +66,21 @@
                     <label for="inputPerfil" class="col-sm-3 col-form-label">Perfil:</label>
                     <div class="col-sm-9">
                     <select name="perf" id="perf"class="col-sm-9 form-control">
-                        <option value="aluno" id="aluno">Aluno</option>
-                        <option value="professor" id="professor">Professor</option>
+                        <option value="Aluno" name="Aluno">Aluno</option>
+                        <option value="Professor" name="Professor">Professor</option>
                     </select>
                     </div>
                 </div>
 
-                <div style="text-align: right;" class="col-sm-8">
-                    <br><button type="submit" class="btn btn-primary">Registar</button></div>
-                </div>
-            </form>  <!--botões deverãopassar para dentro do form--> 
                 <div class="form-group row">
                     <div class="col-sm-4">
-                    
-                    <br><a class="btn btn-primary" href="login.php" >Ja registado?</div></a>
+                    <br><a class="btn btn-primary"  values="registar" href="login.php">Já Registado?</a></div>
+
                         <!-- <br><a href="registar.php" class="btn btn-primary">Registar</a> -->
                     <div style="text-align: right;" class="col-sm-8">
-                    <!-- <br><button type="submit" class="btn btn-primary"  >Registar</button></div> -->
-                    </div>
+                        <br><button type="submit" class="btn btn-primary">Registar</button></div>
+                </div>
+
                     
         </div>
     </div>

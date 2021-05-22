@@ -1,4 +1,4 @@
-#aside-left {
+7:04 PM 5/21/2021#aside-left {
     width: 50%;
     float: left;
     background-color: rgb(221, 221, 221);
@@ -60,8 +60,32 @@
     width: 100%;
     height: 100%;
   }
-  
-  body {
-    background-image: url("images/istec.png");
-    background-size: 70%;
-  }
+
+ #botao:hover {
+   background-color:#8a8a8a;
+   color:rgb(red, green, blue);
+   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.3), 0 17px 50px 0 rgba(0,0,0,0.2); 
+
+ }
+
+ #botao1:hover {
+  background-color:#a06161;
+  color:rgb(red, green, blue);
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.3), 0 17px 50px 0 rgba(0,0,0,0.2); 
+}
+
+#botao2:hover {
+  background-color:#6a9ac2;
+  color:rgb(red, green, blue);
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.3), 0 17px 50px 0 rgba(0,0,0,0.2); 
+}
+
+#botao3:hover {
+  background-color:rgb(252,0,0);
+  font-size: 16px;
+  cursor: pointer;
+  color:rgba(255,255,255);
+  border: 2px solid #ff1100;
+  padding: 6px 12px;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.3), 0 17px 50px 0 rgba(0,0,0,0.2); 
+}

@@ -20,12 +20,12 @@ CREATE TABLE email_Prof(
 );
 
 CREATE TABLE Professor (
-	id_prof int NOT NULL AUTO_INCREMENT primary key,
+	id int NOT NULL AUTO_INCREMENT primary key,
 	nome varchar(100),
 	morada varchar(70),
 	telemovel varchar(13),
 	email varchar(30) not null,
-	password varchar(20),
+	password varchar(32),
 	CONSTRAINT fk_email FOREIGN KEY (email) references email_Prof(email),
 	tipo varchar(10)
 );
@@ -35,16 +35,17 @@ CREATE TABLE Sumario (
 );
 
 CREATE TABLE Aluno (
-	id_aluno int not null AUTO_INCREMENT primary key,
+	id int not null AUTO_INCREMENT primary key,
 	nome varchar(100) not null,
 	morada varchar(70),
 	telemovel varchar(13),
 	email varchar(30) not null UNIQUE KEY,
-	password varchar(20) not null,
+	password varchar(32) not null,
 	id_turma int,  
 	CONSTRAINT fk_id_turma FOREIGN KEY (id_turma) references Turma(id_turma),
 	CONSTRAINT fk_email1 FOREIGN KEY (email) references email_Aluno(email),
 	tipo varchar(10)
+
 );
 
 
@@ -74,7 +75,7 @@ CREATE TABLE Aula (
 CREATE TABLE marca (
 	id_aluno int not null,
 	id_aula int not null,
-	CONSTRAINT fk_id_aluno1 FOREIGN KEY(id_aluno) references Aluno(id_aluno),
+	CONSTRAINT fk_id_aluno1 FOREIGN KEY(id_aluno) references Aluno(id),
 	CONSTRAINT fk_id_aula FOREIGN KEY(id_aula) references Aula(id),
 	presencas boolean,
 	primary key (id_aluno, id_aula)
@@ -91,7 +92,7 @@ CREATE TABLE tem (
 CREATE TABLE leciona (
 	id_prof int not null,
 	id_uc int not null,
-	CONSTRAINT fk_id_prof1 FOREIGN KEY(id_prof) references Professor(id_prof),
+	CONSTRAINT fk_id_prof1 FOREIGN KEY(id_prof) references Professor(id),
 	CONSTRAINT fk_id_uc2 FOREIGN KEY(id_uc) references UC(id_uc),
 	primary key (id_prof, id_uc)
 );

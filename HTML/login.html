@@ -14,6 +14,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="JS/javasript.js" ></script>    
     <title>Login Alunos</title>
+    <style> 
+        body {
+        background-image: url("images/istec.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
 </head>
 <body>
 
@@ -25,14 +32,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home </span></a>
+                <li class="nav-item">
+                    <a class="nav-link" id="botao" href="#">Home </span></a>            <!-- hoVER -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Info</a>
+                    <a class="nav-link" id="botao" href="#">Info</a>            <!-- hoVER -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sobre</a>
+                    <a class="nav-link" id="botao" href="#">Sobre</a>           <!-- hoVER -->
                 </li>
             </ul>
         </div>
@@ -85,11 +92,11 @@
         <div class="row">
             <div class="col-md-5"></div>
             <div class="col-md-1">
-                <b><p style="text-align: center;"> <a href="registar.html"> Registar </a></p></b>
+                <b><p style="text-align: center;"> <a href="registar.html" id="botao3"> Registar </a></p></b>           <!-- hoVER -->
             </div>
             <div class="col-md-1">
                 <p style="text-align: center;">
-                    <button onclick="login()">Login</button></p>
+                    <button id="botao3" onclick="login()">Login</button></p>            <!-- hoVER -->
             </div>
             <div class="col-md-5"></div>
         </div>

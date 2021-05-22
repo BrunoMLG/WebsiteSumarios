@@ -1,13 +1,3 @@
-<?php
-$stmt = $dbh->prepare('select email from email_aluno ');
-$stmt->execute();
-$result = $stmt->fetchAll();
-
-$stmt = $dbh->prepare('select email from email_prof ');
-$stmt->execute();
-$result1 = $stmt->fetchAll();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,26 +23,9 @@ $result1 = $stmt->fetchAll();
                     </div>
                 </div><br>
                 <br>
-
-
                 <div class="form-group row col-sm-7">
-                    <P>Emials Recentes:</P>
-                    <!-- <input type="text"class="form-control " name ="alunoR"   readonly> -->
-                     <table class="table">
-                        <tr>
-                            <th>Email</th>
-                        </tr>
-                        <?php
-                            foreach($result as $row){
-                        ?>
-                        <tr>
-                            <td><?php echo $row['email'] ?></a></td>                            
-                        </tr>
-
-                        <?php 
-                        }
-                        ?> 
-                     </table>  
+                    <P>Emials Recentes.</P>
+                    <input type="text"class="form-control " name ="alunoR"   readonly>
                 </div>
             </form>    
         </div>
@@ -71,22 +44,8 @@ $result1 = $stmt->fetchAll();
                 </div><br>
                 <br>
                 <div class="form-group row row col-sm-7">
-                    <P>Emials Recentes:</P>
-                     <table class="table">
-                        <tr>
-                            <th>Email</th>
-                        </tr>
-                        <?php
-                            foreach($result1 as $row1){
-                        ?>
-                        <tr>
-                           <td><?php echo $row1['email'] ?></a></td>                            
-                        </tr>
-
-                        <?php 
-                        }
-                        ?> 
-                     </table>  
+                    <P>Emials Recentes.</P>
+                    <input type="text"class="form-control " name ="alunoR"   readonly>
                 </div>
             </form>    
         </div>

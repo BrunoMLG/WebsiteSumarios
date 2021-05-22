@@ -31,10 +31,10 @@
         <div class="col-md-11">
             <div class="tab-content" id="v-pills-tabContent">
                 <div class="tab-pane fade offset-md-1 show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"><?php include_once('admin/home_admin.php');?></div>
-                <div class="tab-pane fade offset-md-1" id="v-pills-profile"  role="tabpanel" aria-labelledby="v-pills-profile-tab"><?php include_once('admin/home_admin.php');?></div>
-                <div class="tab-pane fade offset-md-1" id="v-pills-Turmas" role="tabpanel" aria-labelledby="v-pills-Turmas-tab"><?php include_once('admin/turma.php');?></div>
+                <div class="tab-pane fade offset-md-1" id="v-pills-profile"  role="tabpanel" aria-labelledby="v-pills-profile-tab">YES</div>
+                <div class="tab-pane fade offset-md-1" id="v-pills-Turmas" role="tabpanel" aria-labelledby="v-pills-Turmas-tab">Lista de Turmas: </div>
                 <div class="tab-pane fade offset-md-1" id="v-pills-login" role="tabpanel" aria-labelledby="v-pills-login-tab"><?php include_once('admin/codigos_login.php');?></div>
-                <div class="tab-pane fade offset-md-1" id="v-pills-sumarios" role="tabpanel" aria-labelledby="v-pills-sumarios-tab"><?php include_once('admin/home_admin.php');?></div>
+                <div class="tab-pane fade offset-md-1" id="v-pills-sumarios" role="tabpanel" aria-labelledby="v-pills-sumarios-tab">Sumarios: </div>
                 <div class="tab-pane fade offset-md-1" id="v-pills-users" role="tabpanel" aria-labelledby="v-pills-users-tab"><?php include_once('admin/lista_users.php');?></div>
                 <div class="tab-pane fade offset-md-1" id="v-pills-ucs" role="tabpanel" aria-labelledby="v-pills-ucs-tab"><?php include_once('admin/UC.php');?> </div>
 

@@ -28,6 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Check if password is empty
     if(empty(trim($_POST["password"]))){
+        
         $password_err = "Insira a Password!";
     } else{
         $password = trim($_POST["password"]);
@@ -55,7 +56,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         $tipo = $row["tipo"];
                         $username = $row["nome"];
                         $hashed_password = $row["password"];
-                        if($password== $hashed_password){
+                        $password = md5($password);
+                        if($password == $hashed_password){
                             // Password is correct, so start a new session
                             session_start();
                             
@@ -70,10 +72,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         } else{
                             // Password is not valid, display a generic error message
                             $login_err = "Password ou nome errados.";
+                            
                         }
                     }
                 } else{
                     // Username doesn't exist, display a generic error message
+                   
                     $login_err = "Password ou nome Invalidos.";
                 }
             } else{
@@ -92,6 +96,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,8 +139,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="col-md-4 offset-md-4">
         <?php 
         if(!empty($login_err)){
-            echo '<div class="alert alert-danger">' . $login_err . '</div>';
-        }        
+            echo '<script> alert("'.$login_err .'"); </script> ';
+           
+            //echo '<div class="alert alert-danger">' . $login_err . '</div> <script> alert("'.$login_err .'"); </script> ';
+        }    
+        
         ?>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                 <div class="form-group row">
@@ -149,22 +159,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     </div>
                 </div><br>
 
-                <!-- <div class="form-group row">
-                    <label for="inputPerfil" class="col-sm-3 col-form-label">Perfil:</label>
-                    <div class="col-sm-9">
-                    <select name="perf" id="perf"class="col-sm-9 form-control">
-                        <option value="aluno" id="aluno">Aluno</option>
-                        <option value="professor" id="professor">Professor</option>
-                    </select>
-                    </div> -->
-                <!-- </div>  -->
                 <div class="form-group row">
                     <div class="col-sm-3">
-                    <br><button type="submit" class="btn btn-primary"  values="registar">Registar</button></div>
+                    <br><a class="btn btn-primary"  values="registar" href="registar.php">Registar</a></div>
 
-                        <!-- <br><a href="registar.php" class="btn btn-primary">Registar</a> -->
+
                     <div style="text-align: right;" class="col-sm-9">
-                        <br><button type="submit" class="btn btn-primary"  Values="login">Login</button></div>
+                        <br><button type="submit" class="btn btn-primary"  Values="login" id="login">Login</button></div>
                     </div>
                 
                  </form>  

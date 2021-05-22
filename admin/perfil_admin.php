@@ -1,3 +1,15 @@
+<?php
+
+
+    $sql ="select * from admin where id_admin= ?";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute(array($_SESSION["id"]));
+    $row = $stmt->fetch();
+    
+    $username = $row["Nome"];
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +35,7 @@
                 <div class="form-group row">
                     <label for="inputNome" class="col-sm-2 col-form-label">Nome</label>
                     <div class="col-sm-10">
-                        <input type="nome" class="form-control" id="inputNome" placeholder="Nome">
+                        <input type="nome" class="form-control" id="inputNome" placeholder="Nome" value="<?php echo $username;?>">
                     </div>
                 </div>
                 <div class="form-group row">
