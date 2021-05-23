@@ -29,7 +29,7 @@ $result = $stmt->fetchAll();
                 <td><?php echo $row['id'] ?></td>
                 <td><?php echo $row['nome'] ?></a></td>
                 <td><?php echo $row['tipo'] ?></a></td>
-                <td><a>Editar</a></td>
+                <td><a href="editUser.php?id=<?php echo $row['id']?>&tipo=<?php echo $row['tipo']?>">Editar</a></td>
                 
             </tr>
 

@@ -2,31 +2,29 @@
   include_once('snippets/head.php');
   
   include('snippets/startDB.php');
-
+//include('snippets/Session.php');
+session_id("users");
 session_start();
  
-// Check if the user is already logged in, if yes then redirect him to welcome page
+// Verifica se o utilizador esta logado, se sim entao redireciona a pagina principal
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: lista_disc_alunos.php");
+    header("location: lista_disc.php");
     exit;
 }
 
- 
-// Define variables and initialize with empty values
 $email = $password = "";
 $email_err = $password_err = $login_err = "";
  
-// Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
-    // Check if username is empty
+    // Verifica se o utilizador esta vazio
     if(empty(trim($_POST["email"]))){
         $email_err = "Insira o Email!";
     } else{
         $email = trim($_POST["email"]);
     }
     
-    // Check if password is empty
+    // Verifica se a palavra-passe esta vazia
     if(empty(trim($_POST["password"]))){
         
         $password_err = "Insira a Password!";
@@ -34,22 +32,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $password = trim($_POST["password"]);
     }
     
-    // Validate credentials
+    // Valida as credenciais
     if(empty($email_err) && empty($password_err)){
-        // Prepare a select statement
         $sql = "SELECT id, nome, password, email ,tipo FROM aluno WHERE email = ? UNION SELECT id, nome, password, email, tipo FROM professor WHERE email = ?";
         
         if($stmt = $dbh->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
              $email = $_POST['email'];
-            //$stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
             
-            // Set parameters
-            //$param_username = trim($_POST["nome"]);
-            
-            // Attempt to execute the prepared statement
             if($stmt->execute(array($email, $email))){
-                // Check if username exists, if yes then verify password
+                // Verifica o utilizador, se existe entao verifica palavra-passe
                 if($stmt->rowCount() == 1){
                     if($row = $stmt->fetch()){
                         $id = $row["id"];
@@ -57,26 +48,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         $username = $row["nome"];
                         $hashed_password = $row["password"];
                         $password = md5($password);
+                        
                         if($password == $hashed_password){
-                            // Password is correct, so start a new session
+                            // Palavra-passe esta correta, entao inicia nova sessao
                             session_start();
                             
-                            // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["nome"] = $username;   
-                            $_SESSION["tipo"] = $tipo;                        
+                            $_SESSION["tipo"] = $tipo; 
+
+                             if($tipo == 'Aluno'){
+                             $sql1 = "SELECT id_turma FROM aluno WHERE email = ?";
+                             $stmt = $dbh->prepare($sql1);
+                             $stmt->execute(array($email));
+                             $row1 = $stmt->fetch();
+                            $turma = $row1['id_turma'];
+                            $_SESSION["turma"] = $turma; 
+                         }
+                                         
                             
-                            // Redirect user to welcome page
-                            header("location: lista_disc_alunos.php");
+                            // Redireciona utilizador a pagina principal
+                            header("location: lista_disc.php");
                         } else{
-                            // Password is not valid, display a generic error message
+                            // Palavra-passe nao e valida, mostra uma mensagem de erro
                             $login_err = "Password ou nome errados.";
                             
                         }
                     }
                 } else{
-                    // Username doesn't exist, display a generic error message
+                    // Utilizador nao existe, mostra uma mensagem de erro
                    
                     $login_err = "Password ou nome Invalidos.";
                 }
@@ -84,12 +85,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 echo "Erro! Tente novamente mais tarde.";
             }
 
-            // Close statement
             unset($stmt);
         }
     }
     
-    // Close connection
     unset($dbh);
     }
 
@@ -103,7 +102,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
 	<script src="JS/javasript.js" ></script> 
-    <title>Login Alunos</title>
+    <title>Login </title>
 </head>
 <body>
 
@@ -141,7 +140,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(!empty($login_err)){
             echo '<script> alert("'.$login_err .'"); </script> ';
            
-            //echo '<div class="alert alert-danger">' . $login_err . '</div> <script> alert("'.$login_err .'"); </script> ';
         }    
         
         ?>

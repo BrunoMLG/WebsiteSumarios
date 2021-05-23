@@ -74,7 +74,7 @@
 
                 <div class="form-group row">
                     <div class="col-sm-4">
-                    <br><a class="btn btn-primary"  values="registar" href="login.php">Já Registado?</a></div>
+                    <br><a class="btn btn-primary"  values="registar" href="login.php">Já registado?</a></div>
 
                         <!-- <br><a href="registar.php" class="btn btn-primary">Registar</a> -->
                     <div style="text-align: right;" class="col-sm-8">

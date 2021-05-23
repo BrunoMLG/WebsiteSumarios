@@ -27,11 +27,13 @@ CREATE TABLE Professor (
 	email varchar(30) not null,
 	password varchar(32),
 	CONSTRAINT fk_email FOREIGN KEY (email) references email_Prof(email),
-	tipo varchar(10)
+	tipo varchar(10),
+	imagem longblob
 );
 
 CREATE TABLE Sumario (
- 	id int NOT NULL AUTO_INCREMENT primary key
+ 	id int NOT NULL AUTO_INCREMENT primary key,
+	Sumario varchar(500)
 );
 
 CREATE TABLE Aluno (
@@ -44,7 +46,8 @@ CREATE TABLE Aluno (
 	id_turma int,  
 	CONSTRAINT fk_id_turma FOREIGN KEY (id_turma) references Turma(id_turma),
 	CONSTRAINT fk_email1 FOREIGN KEY (email) references email_Aluno(email),
-	tipo varchar(10)
+	tipo varchar(10),
+	imagem longblob
 
 );
 
@@ -59,9 +62,9 @@ CREATE TABLE UC (
 
 CREATE TABLE Aula (
 	id int NOT NULL AUTO_INCREMENT primary key,
-	data2 date not null,
-	hora_ini datetime not null,
-	hora_fim datetime not null,
+	data2 VARCHAR(20) not null,
+	hora_ini VARCHAR(20) not null,
+	hora_fim VARCHAR(20) not null,
 	duracao integer not null,
 	modo varchar(30) not null,
 	tipo varchar(30) not null,
@@ -77,7 +80,7 @@ CREATE TABLE marca (
 	id_aula int not null,
 	CONSTRAINT fk_id_aluno1 FOREIGN KEY(id_aluno) references Aluno(id),
 	CONSTRAINT fk_id_aula FOREIGN KEY(id_aula) references Aula(id),
-	presencas boolean,
+	presencas varchar(10),
 	primary key (id_aluno, id_aula)
 );
 
@@ -101,13 +104,13 @@ CREATE TABLE leciona (
 CREATE TABLE Admin(
 	id_Admin int NOT NULL AUTO_INCREMENT primary key,
 	Nome varchar(100) unique key,
-	password varchar(20)
+	password varchar(32)
 );
 
 insert into email_prof values('rb@gmail.com')
 insert into email_aluno values('bruno@gmail.com')
 
-insert into Admin values(null,'admin','admin')
+insert into Admin values(null,'admin','21232f297a57a5a743894a0e4a801fc3')
 
 
 insert into professor values(null,'Ricardo Batista',null,null,'rb@gmail.com','123','Professor')

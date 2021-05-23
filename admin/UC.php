@@ -1,7 +1,11 @@
 <?php
-$stmt = $dbh->prepare('select nome, horas from uc ');
+$stmt = $dbh->prepare('select id_uc ,nome, horas from uc ');
 $stmt->execute();
 $result = $stmt->fetchAll();
+
+$stmt = $dbh->prepare('select id, nome from professor ');
+$stmt->execute();
+$profs = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -24,6 +28,21 @@ $result = $stmt->fetchAll();
                         <div class="col-sm-2">
                             <input type="number" class="form-control" name ="horas" id="horas" required>
                         </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="UC" class="col-sm-3 col-form-label">Professor da UC:</label>
+                        <div class="col-sm-2">
+                            <select class="form-control" name="listProfs" >
+                                <?php foreach($profs as $row1){ ?>
+                                <option value="<?php echo($row1['id'])?>"><?php echo $row1['nome'] ?></option> 
+                            
+                        
+                                <?php 
+                                        } 
+                                ?>               
+                              </select>
+                        </div>
+                    
                     
                         <div class="col-sm-2">
                             <button type="submit" class="btn btn-primary">Adicionar</button>
@@ -44,7 +63,7 @@ $result = $stmt->fetchAll();
         <tr>
             <td><?php echo $row['nome'] ?></a></td>          
             <td><?php echo $row['horas'] ?></a></td>   
-            <td><a>Editar</a></td>                            
+            <td><a href="editUC.php?id=<?php echo $row['id_uc']?>">Editar</a></td>                            
         </tr>
 
         <?php 

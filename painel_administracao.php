@@ -11,7 +11,14 @@
 <html lang="en">
 <head>
     <script src="JS/javascript_admin.js" ></script>  
-
+    <style >
+    body {
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-image: url("images/white.jpg");
+    background-size: 90%;
+   
+  } </style>
     <title>Login Administração</title>
 </head>
 <body> 
@@ -34,7 +41,7 @@
                 <div class="tab-pane fade offset-md-1" id="v-pills-profile"  role="tabpanel" aria-labelledby="v-pills-profile-tab"><?php include_once('admin/home_admin.php');?></div>
                 <div class="tab-pane fade offset-md-1" id="v-pills-Turmas" role="tabpanel" aria-labelledby="v-pills-Turmas-tab"><?php include_once('admin/turma.php');?></div>
                 <div class="tab-pane fade offset-md-1" id="v-pills-login" role="tabpanel" aria-labelledby="v-pills-login-tab"><?php include_once('admin/codigos_login.php');?></div>
-                <div class="tab-pane fade offset-md-1" id="v-pills-sumarios" role="tabpanel" aria-labelledby="v-pills-sumarios-tab"><?php include_once('admin/home_admin.php');?></div>
+                <div class="tab-pane fade offset-md-1" id="v-pills-sumarios" role="tabpanel" aria-labelledby="v-pills-sumarios-tab"><?php include_once('admin/ucsumario.php');?></div>
                 <div class="tab-pane fade offset-md-1" id="v-pills-users" role="tabpanel" aria-labelledby="v-pills-users-tab"><?php include_once('admin/lista_users.php');?></div>
                 <div class="tab-pane fade offset-md-1" id="v-pills-ucs" role="tabpanel" aria-labelledby="v-pills-ucs-tab"><?php include_once('admin/UC.php');?> </div>
 

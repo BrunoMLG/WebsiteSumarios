@@ -19,27 +19,67 @@ $username = $row["nome"];
     $telemovel = $row["telemovel"];
     $morada = $row["morada"];
     $perfil = $row["tipo"];
+    $image = $row['imagem'];
+    if($image == '') {$image = 'default.jpg';}
+
+
+    if (isset($_POST['upload'])) {
+ 
+        $filename = $_FILES["uploadfile"]["name"];
+        $tempname = $_FILES["uploadfile"]["tmp_name"];   
+            $folder = "perfil/pefil".$_SESSION['id'] . '.jpg';
+
+            if($_SESSION['tipo']== 'Aluno'){
+                $stmt = $dbh->prepare('UPDATE aluno SET imagem = ? WHERE id = ?');  
+                $stmt->execute(array($filename, $_SESSION["id"]));
+            
+                }else if($_SESSION['tipo']== 'Professor'){
+                    $stmt = $dbh->prepare('UPDATE professor SET imagem = ? WHERE id = ?') ;
+                    $stmt->execute(array($filename, $_SESSION["id"])) ;
+                }
+
+            
+            // Move a imagem para o diretório image
+            if (move_uploaded_file($tempname, $folder))  {
+                $msg = "Image uploaded successfully";
+                header("location:perfil_aluno.php");
+            }else{
+                $msg = "Failed to upload image";
+          }
+      }
+    
+
+
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Perfil</title>
-    <link rel="stylesheet"  type="text/css" href="stylesheet.css">
+    <?php include("snippets/head.php") ?>
 </head>
 <body>
     <?php
-  include_once('snippets/menu_aluno.php');
+  include_once('snippets/menu.php');
 ?>
-    
+    </
     <div class="container-fluid">
         <h1 style="text-align: center; font-size: 80px">Perfil</h1>
     </div>
     <br>
     <div class="row">
-        <div class="col-md-2"><img style="height: 170px;" src="images\default_user.jpg"><br><br>
-                    <button type="submit" class="btn btn-primary" style="font-size:10px;">Alterar Fotografia</button>
-                    <button type="submit" class="btn btn-primary" style="font-size:10px;">Alterar Password</button> <br><br>
+    
+        <div class="col-md-2"><img style="height: 170px;" src='<?php echo 'perfil/'.$image; ?>'><br><br>
+        <form action="" method="POST" enctype="multipart/form-data">
+                    <span class="btn btn-primary btn-file" style="font-size:10px;">
+                        <label for="uploadfile"> Fotografia </label> 
+                        <input type="file" name="uploadfile" value="" />
+                        
+                        
+                    </span>
+                    <input type="submit" class="btn btn-primary" name="upload" style="font-size:10px" value="Enviar"/>
+                </form>
+                    <a href="newpw.php" class="btn btn-primary" style="font-size:10px;">Alterar Password</a> <br><br>
                     <button type="submit" class="btn btn-primary" style="font-size:10px;">Horario</button>
                 </div>
             

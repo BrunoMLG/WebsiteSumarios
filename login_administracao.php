@@ -4,88 +4,79 @@
 
 <?php
   include('snippets/startDB.php');
+ //include_once('snippets/SessionAdmin.php');
+ session_id("admin");
 
-session_start();
+ session_start();
  
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: painel_administracao.php");
-    exit;
-}
+// Verifica se o utilizador esta logado, se sim entao redireciona para a pagina principal
+ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+     header("location: painel_administracao.php");
+     exit;
+ }
 
- 
-// Define variables and initialize with empty values
+
 $username = $password = "";
 $username_err = $password_err = $login_err = "";
- 
-// Processing form data when form is submitted
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
-    // Check if username is empty
+    // Verifica se o utilizador esta vazio
     if(empty(trim($_POST["nome"]))){
         $username_err = "Insira o Nome!";
     } else{
         $username = trim($_POST["nome"]);
     }
     
-    // Check if password is empty
+    // Verifica se a palavra-passe esta vazia
     if(empty(trim($_POST["password"]))){
         $password_err = "Insira a Password!";
     } else{
         $password = trim($_POST["password"]);
     }
     
-    // Validate credentials
+    // Valida as credenciais
     if(empty($username_err) && empty($password_err)){
-        // Prepare a select statement
         $sql = "SELECT id_admin, nome, password FROM admin WHERE nome = ?";
         
         if($stmt = $dbh->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
              $username = $_POST['nome'];
-            //$stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
             
-            // Set parameters
-            //$param_username = trim($_POST["nome"]);
-            
-            // Attempt to execute the prepared statement
             if($stmt->execute(array($username))){
-                // Check if username exists, if yes then verify password
+                // Verifica se o utilizador existe, se sim entao verifica a palavra-passe
                 if($stmt->rowCount() == 1){
                     if($row = $stmt->fetch()){
                         $id = $row["id_admin"];
                         $username = $row["nome"];
+                        $password = md5($password);
                         $hashed_password = $row["password"];
                         if($password== $hashed_password){
-                            // Password is correct, so start a new session
+                            // Palavra-passe esta correta, entao começa nova sessao
                             session_start();
                             
-                            // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["nome"] = $username;                            
                             
-                            // Redirect user to welcome page
+                            // Redireciona utilizador a pagina principal
                             header("location: painel_administracao.php");
                         } else{
-                            // Password is not valid, display a generic error message
+                            // Password não é valida, mostra uma mensagem de erro
                             $login_err = "Password ou nome errados.";
                         }
                     }
                 } else{
-                    // Username doesn't exist, display a generic error message
+                    // Utilizador não existe, mostra uma mensagem de erro
                     $login_err = "Password ou nome Invalidos.";
                 }
             } else{
                 echo "Erro! Tente novamente mais tarde.";
             }
 
-            // Close statement
             unset($stmt);
         }
     }
     
-    // Close connection
     unset($dbh);
     }
 

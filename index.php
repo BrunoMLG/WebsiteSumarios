@@ -39,8 +39,18 @@
           
         </div>
       </nav>
-  
+      <div class="col-md-6 offset-md-3">
+      <table class="table table-borded">
+      <tr><th><p style="font-size: 20px;">Noticias</p></th></tr>
+<?php 
+  $data = file_get_contents("noticias.json");
+  $data = json_decode($data, true);
+  foreach($data as $row){
+    echo '<tr><td>'.$row["Notícias"]. '</td></tr>';
 
-
+  }
+?>
+</table>
+      </div>
 </body>
 </html>

@@ -58,7 +58,7 @@ $result = $stmt->fetchAll();
             <td><?php echo $row['curso'] ?></a></td>  
             <td><?php echo $row['ano'] ?></a></td>   
             <td><?php echo $row['semestre'] ?></a></td>    
-            <td><a>Editar</a></td>                            
+            <td><a href="editTurma.php?id=<?php echo $row['id_turma']?>">Editar</a></td>                            
         </tr>
 
         <?php 
