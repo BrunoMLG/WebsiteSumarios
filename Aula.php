@@ -6,11 +6,11 @@
   $id_aula = $_GET['id_aula'];
 
 
-    $turma = $_SESSION["turma"];
+    //$turma = $_SESSION["turma"];
 
-    $stmt = $dbh->prepare('SELECT aula.id, aula.data2, uc.id_uc from aula, uc where uc.id_uc = aula.id_uc and uc.id_uc = ?');
-    $stmt->execute(array($id_uc));
-    $result = $stmt->fetchAll();
+        $stmt = $dbh->prepare('SELECT aula.id, aula.data2, uc.id_uc, aula.id_sum, sumario.sumario from aula, uc, sumario where uc.id_uc = aula.id_uc and sumario.id = aula.id_sum and uc.id_uc = ? and aula.id=?');
+        $stmt->execute(array($id_uc, $id_aula));
+        $result = $stmt->fetch();
 
     if(isset($_POST['submitP'])){
         if($_SESSION['tipo'] == 'Aluno'){
@@ -41,12 +41,19 @@
   ?>
 
   <div class="container-fluid">
-            <h1 style="text-align: center; font-size: 80px">Presenças</h1>
+  <?php
+  if($_SESSION['tipo'] == 'Aluno'){ ?>
+            
         </div>
         <br>   
   <form action="" method="POST">
-                        <div class="form-group ">
-                            <div class="form-check form-check-inline">
+                        <div class="form-group " style="background-color: rgba(255,255,255,0.5);">
+                        <h1 style="text-align: center; font-size: 80px">Sumario</h1>
+                        <textarea name="sumario" readonly style="  display: block; margin-left: auto; margin-right: auto;"><?php echo $result['sumario']; ?></textarea>
+                        <h1 style="text-align: center; font-size: 65px">Presenças</h1>
+                        <div style="text-align: center;">
+                            <br><br><br>
+                            <div class="form-check form-check-inline "  >
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Presente">
                                 <label class="form-check-label" for="inlineRadio1">Presente</label>
                             </div>
@@ -59,7 +66,15 @@
                                 <a href="UC.php?id=<?php echo $id_uc; ?>" class="btn btn-primary">Voltar</a>
                             </div>
                         </div>
+                        </div>
                      </form> 
-    
+    <?php }else if($_SESSION['tipo'] == 'Professor'){?>
+        <h1 style="text-align: center; font-size: 80px">Sumario</h1>
+            <textarea name="sumario" readonly><?php echo $result['sumario']; ?></textarea>
+            <a target="_blank" rel="noopener noreferrer" class="btn btn-primary" href="impressao.php?id_uc=<?php echo $id_uc ?>&id_aula=<?php echo $id_aula ?>">Imprimir</a>
+            
+
+    <?php } ?>
+
   </body>
   </html>

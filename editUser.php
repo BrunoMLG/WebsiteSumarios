@@ -76,7 +76,7 @@ if($tipo == "Aluno"){
         <div class="col-md-2"><img style="height: 170px;" src="images\default_user.jpg"><br><br>
                     <button type="submit" class="btn btn-primary" style="font-size:10px;">Alterar Fotografia</button>
                     <button type="submit" class="btn btn-primary" style="font-size:10px;">Alterar Password</button> <br><br>
-                    <button type="submit" class="btn btn-primary" style="font-size:10px;">Horario</button>
+                    <a type="submit" class="btn btn-primary" style="font-size:10px;" href="Horarios.pdf" download>Horario</a>
                 </div>
             
         

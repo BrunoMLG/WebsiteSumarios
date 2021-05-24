@@ -1,8 +1,6 @@
 <?php
-  include('startDB.php');
+  include('snippets/startDB.php');
 
-// session_start();
-// $conn = new mysqli('localhost', 'root', '', 'websitesumarios');
 
 $email = $_POST['email'];
 $nome = $_POST['nome'];
@@ -28,11 +26,14 @@ $perfil = $_POST['perf'];
 				$stmt = $dbh->prepare('insert into aluno(id, nome, email, password, tipo) values(?, ?, ?, ?, ?)');
 				$stmt->execute(array('null',$nome,$email,$password, $perfil));
 
-				echo("Registo realizado!");
+				echo("<script>alert('Registo realizado!'); window.location.href='login.php';</script>");
+				
 			}else{if($num1 != 0){
-				echo("Email já registado!");}
+				echo("<script>alert('Já Registado!'); window.location.href='login.php';</script>");
+				}
 				else{
-					echo("Email não validado!");
+					echo("<script>alert('Email não Validado! Valide o Email na Secretaria!'); window.location.href='registar.php';</script>");
+
 				}
 			}
 		}else{
@@ -51,19 +52,21 @@ $perfil = $_POST['perf'];
 		
 					$stmt = $dbh->prepare('insert into professor(id, nome, email, password, tipo) values(?, ?, ?, ?, ?)');
 					$stmt->execute(array('null',$nome,$email,$password, $perfil));
-		
-					echo("Registo realizado!");
+					echo("<script>alert('Registo realizado!'); window.location.href='login.php';</script>");
+
 				}else{if($num1 != 0){
-					echo("Email já registado!");}
+					echo("<script>alert('Já Registado!'); window.location.href='login.php';</script>");
+					}
 					else{
-						echo("Email não validado!");
+						echo("<script>alert('Email não Validado! Valide o Email na Secretaria!'); window.location.href='registar.php';</script>");
+
 					}
 				}
 
 
 		
 	}}} else{
-		echo("Password não coincide!");
+		echo("<script>alert('Passwords não coincidem!'); window.location.href='registar.php';</script>");
 	}
 
 	

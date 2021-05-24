@@ -4,8 +4,7 @@
   include_once('snippets/SessionAdmin.php');
   
 
-
-
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +25,6 @@
         <div class="col-md-1">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-                <a class="nav-link" id="v-pills-profile-tab"  data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Alguma cena</a>
                 <a class="nav-link" id="v-pills-Turmas-tab" data-toggle="pill" href="#v-pills-Turmas" role="tab" aria-controls="v-pills-messages" aria-selected="false">Turmas</a>
                 <a class="nav-link" id="v-pills-login-tab" data-toggle="pill" href="#v-pills-login" role="tab" aria-controls="v-pills-settings" aria-selected="false">Codigos de login</a>
                 <a class="nav-link" id="v-pills-sumarios-tab" data-toggle="pill" href="#v-pills-sumarios" role="tab" aria-controls="v-pills-settings" aria-selected="false">Sumarios</a>
@@ -37,8 +35,7 @@
         </div>
         <div class="col-md-11">
             <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade offset-md-1 show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"><?php include_once('admin/home_admin.php');?></div>
-                <div class="tab-pane fade offset-md-1" id="v-pills-profile"  role="tabpanel" aria-labelledby="v-pills-profile-tab"><?php include_once('admin/home_admin.php');?></div>
+                <div class="tab-pane fade offset-md-1 show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"><?php include_once('home_admin.php');?></div>
                 <div class="tab-pane fade offset-md-1" id="v-pills-Turmas" role="tabpanel" aria-labelledby="v-pills-Turmas-tab"><?php include_once('admin/turma.php');?></div>
                 <div class="tab-pane fade offset-md-1" id="v-pills-login" role="tabpanel" aria-labelledby="v-pills-login-tab"><?php include_once('admin/codigos_login.php');?></div>
                 <div class="tab-pane fade offset-md-1" id="v-pills-sumarios" role="tabpanel" aria-labelledby="v-pills-sumarios-tab"><?php include_once('admin/ucsumario.php');?></div>

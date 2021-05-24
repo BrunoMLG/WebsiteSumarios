@@ -42,7 +42,7 @@ $username = $row["nome"];
             // Move a imagem para o diretório image
             if (move_uploaded_file($tempname, $folder))  {
                 $msg = "Image uploaded successfully";
-                header("location:perfil_aluno.php");
+                header("location:perfil.php");
             }else{
                 $msg = "Failed to upload image";
           }
@@ -80,7 +80,7 @@ $username = $row["nome"];
                     <input type="submit" class="btn btn-primary" name="upload" style="font-size:10px" value="Enviar"/>
                 </form>
                     <a href="newpw.php" class="btn btn-primary" style="font-size:10px;">Alterar Password</a> <br><br>
-                    <button type="submit" class="btn btn-primary" style="font-size:10px;">Horario</button>
+                    <a type="submit" class="btn btn-primary" style="font-size:10px;" href="Horarios.pdf" download>Horario</a>
                 </div>
             
         
@@ -96,7 +96,7 @@ $username = $row["nome"];
                 <div class="form-group row">
                     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" name="inputEmail" placeholder="Email" value="<?php echo $email;?>">
+                        <input type="email" class="form-control" name="inputEmail" placeholder="Email" value="<?php echo $email;?>" readonly>
                     </div>
                 </div>
                 <div class="form-group row">

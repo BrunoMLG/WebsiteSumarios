@@ -36,7 +36,7 @@
     <div class="row">
         <div class="col-md-4 offset-md-4">
 
-            <form action="snippets/register.php" method="POST">
+            <form action="register.php" method="POST">
                 <div class="form-group row">
                     <label for="nome" class="col-sm-3 col-form-label">Nome de Utilizador:</label>
                     <div class="col-sm-9">
